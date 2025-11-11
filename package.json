@@ -1,0 +1,25 @@
+{ "name": "docker-easy-webserver-pmb",
+  "version": "0.0.0",
+  "description": "A docker image to easily run simple web apps.",
+  "keywords": [],
+
+  "author": "M.K. (https://github.com/mk-pmb)",
+  "homepage": "https://github.com/mk-pmb/docker-easy-webserver-pmb/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mk-pmb/docker-easy-webserver-pmb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mk-pmb/docker-easy-webserver-pmb/issues"
+  },
+  "contributors": [],
+
+  "private": true, "license": "ISC",
+
+  "dependencies": {},
+  "devDependencies": {
+  },
+
+
+  "engines": { "npm": ">=7.0.0", "docker": ">=28.0.0" }
+}
