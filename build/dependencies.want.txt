@@ -1,0 +1,23 @@
+# -*- coding: utf-8, tab-width: 2 -*-
+#
+# If you have some of these dependencies cloned locally already,
+# you can avoid re-downloading them by creating a symlink in the style
+# `dependencies.@$HOSTNAME/$DEP_NAME.git` that points to the `.git`
+# directory of your local repo.
+#
+# The build script nonetheless has to clone those into `tmp.dependencies`
+# in order to have proper bare repos that are fully contained inside the
+# build context (i.e. your local version of this repo here), because
+# `buildx` won't be able to see files outside the build context. Inside
+# the docker container, the build script will see your symlinks verbatim,
+# and they will point to locations that probably won't exist in there.
+
+docker-devel-util-pmb     = github:mk-pmb/
+github-ci-util-2405-pmb   = github:mk-pmb/
+git-util-pmb              = github:mk-pmb/
+terminal-util-pmb         = github:mk-pmb/
+text-util-pmb             = github:mk-pmb/
+
+streamlink                = github:streamlink/
+
+

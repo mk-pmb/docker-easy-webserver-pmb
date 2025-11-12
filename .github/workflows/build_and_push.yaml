@@ -1,0 +1,63 @@
+%YAML 1.1
+# ^-- ATTN: [2019-12-31] If you use a later version, Github will fail
+#   with a bogus error message "You have an error in your yaml syntax".
+# -*- coding: UTF-8, tab-width: 2 -*-
+---
+
+name: 'Build and (maybe) push'
+
+on:
+  push:
+    branches:
+      - '*'
+
+
+env:
+  DOCKER_REGISTRY: 'ghcr.io'
+
+
+jobs:
+  build_and_maybe_push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mk-pmb/github-ci-util-2405-pmb/act/install@experimental
+
+      - run: ghciu ./build/ci_prepare.sh
+        id: ci_prepare
+
+      - run: ghciu ./build/dependencies.clone.sh
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        if: '${{ fromJSON(steps.ci_prepare.outputs.dkimg_push) }}'
+        with:
+          registry: '${{ env.DOCKER_REGISTRY }}'
+          username: '${{ github.actor }}'
+          password: '${{ secrets.GITHUB_TOKEN }}'
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: '.'
+          # file: 'build/dockerfile.conf'
+          # no-cache: true
+          push: '${{ fromJSON(steps.ci_prepare.outputs.dkimg_push) }}'
+          tags: '${{ steps.ci_prepare.outputs.dkimg_tags }}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+...
